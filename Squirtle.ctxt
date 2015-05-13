@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=lev
+comment0.target=Squirtle(int)
+comment1.params=
+comment1.target=void\ gainEXP()
+comment2.params=
+comment2.target=java.util.List\ getListOfAttacks()
+numComments=3
