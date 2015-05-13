@@ -1,4 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Pikachu()
-numComments=1
+comment0.params=lev
+comment0.target=Pikachu(int)
+comment1.params=points
+comment1.target=void\ gainEXP(int)
+numComments=2
