@@ -7,7 +7,7 @@
  */
 
 import java.util.*;
-public class Pikachu
+public class Pikachu implements Pokemon
 {
     private int level, EXP;
     private int HPFull, HPBattle, attack, defense;

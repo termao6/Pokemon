@@ -7,5 +7,5 @@
  */
 public interface Pokemon
 {
-    public void gainEXP();
+    public void gainEXP(int points);
 }
