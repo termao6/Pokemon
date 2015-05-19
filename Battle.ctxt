@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=t2\ cur\ opp
+comment0.target=Battle(Trainer,\ Pokemon,\ Pokemon)
+comment1.params=attacker\ attacked
+comment1.target=void\ attack(Pokemon,\ Pokemon)
+comment2.params=
+comment2.target=void\ catchPokemon()
+comment3.params=ind
+comment3.target=void\ switchPokemon(int)
+numComments=4
