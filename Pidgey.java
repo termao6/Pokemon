@@ -13,8 +13,8 @@ public class Pidgey implements Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Pidgey (int lev){
-        attacks.add(new Move("Thunder Shock", "Electric", 40));
-        attacks.add(new Move("Growl", "Normal", 0));
+        attacks.add(new Move("Gust", "Normal", 40));
+        attacks.add(new Move("Sand Attack", "Normal", 0));
         level = lev;
         HPFull = (int) (Math.random()*(level/3.5)) + (int) ((40.0/9) * (double) lev);
         attack = (int) (Math.random()*(level/4.5)) + (int) ((45.0/17) * (double) lev);

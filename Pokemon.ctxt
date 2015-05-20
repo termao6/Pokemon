@@ -1,4 +1,14 @@
 #BlueJ class context
-comment0.params=points
-comment0.target=void\ gainEXP(int)
-numComments=1
+comment0.params=lev
+comment0.target=Pokemon(int)
+comment1.params=points
+comment1.target=void\ gainEXP(int)
+comment2.params=
+comment2.target=int\ getHPBattle()
+comment3.params=
+comment3.target=int\ getHPFull()
+comment4.params=
+comment4.target=int\ getLevel()
+comment5.params=
+comment5.target=java.util.List\ getListOfAttacks()
+numComments=6

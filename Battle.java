@@ -1,9 +1,9 @@
 
 /**
  * Write a description of class Battle here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * allows Pokemon to battle and interact with each other
+ * @author (your name) Teresa Mao, Amber Hu
+ * @version (a version number or a date) 5/20/15
  */
 public class Battle
 {
@@ -18,7 +18,7 @@ public class Battle
         opponent = opp;
     }
 
-    public void attack(Pokemon attacker, Pokemon attacked)
+    public void attack(Pokemon attacker, Pokemon attacked, Move move)
     {
         
     }
@@ -31,5 +31,13 @@ public class Battle
     public void switchPokemon(int ind)
     {
         current = t.getList().get(ind);
+    }
+    
+    public Pokemon getCurrent() {
+        return current;
+    }
+    
+    public Pokemon getOpponent() {
+        return opponent;
     }
 }

@@ -1,13 +1,13 @@
 
 /**
  * Write a description of class Pikachu here.
- * 
+ * class to create a Pikachu object
  * @author (your name) Teresa Mao, Amber Hu
  * @version (a version number or a date) 5/18/2015
  */
 
 import java.util.*;
-public class Pikachu implements Pokemon
+public class Pikachu extends Pokemon
 {
     private int level, EXP;
     private int HPFull, HPBattle, attack, defense, speed;
@@ -32,5 +32,17 @@ public class Pikachu implements Pokemon
             speed += (int) (Math.random()*(level/3));
             HPBattle = HPFull;
         }
+    }
+    public List<Move> getListOfAttacks() {
+        return attacks;
+    }
+    public int getHPFull() {
+        return HPFull;
+    }
+    public int getHPBattle() {
+        return HPBattle;
+    }
+    public void setHPBattle(int n) {
+        HPBattle = n;
     }
 }

@@ -13,7 +13,7 @@ public class Charmander implements Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Charmander (int lev){
-        attacks.add(new Move("Thunder Shock", "Electric", 40));
+        attacks.add(new Move("Scratch", "Normal", 40));
         attacks.add(new Move("Growl", "Normal", 0));
         level = lev;
         HPFull = (int) (Math.random()*(level/3.5)) + (int) ((39.0/9) * (double) lev);
