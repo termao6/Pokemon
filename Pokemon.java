@@ -8,15 +8,17 @@
 import java.util.*;
 public abstract class Pokemon
 {
-    int level;
+    private int level;
     public Pokemon (int lev) {
         level = lev;
     }
     public abstract void gainEXP(int points);
     public abstract int getHPBattle();
     public abstract int getHPFull();
+    public abstract void setHPBattle(int n);
     public int getLevel() {
         return level;
     }
     public abstract List<Move> getListOfAttacks();
+    public abstract String getType();
 }
