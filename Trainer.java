@@ -8,7 +8,6 @@
 import java.util.*;
 public class Trainer
 {
-    // instance variables - replace the example below with your own
     private List<Pokemon> list;
     public Trainer(List<Pokemon> l)
     {
