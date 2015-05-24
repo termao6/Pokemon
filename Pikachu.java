@@ -13,15 +13,21 @@ public class Pikachu extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private String type;
     private List<Move> attacks = new ArrayList<Move>();
-    public Pikachu (int l){
+    public Pikachu (int lev){
+        super(lev);
+       
         attacks.add(new Move("Thunder Shock", "Electric", 40));
         attacks.add(new Move("Growl", "Normal", 0));
-        level = l;
         HPFull = (int) (Math.random()*(level/4)) + (int) ((35.0/9) * (double) lev);
         attack = (int) (Math.random()*(level/4)) + (int) ((55.0/17) * (double) lev);
         defense = (int) (Math.random()*(level/6)) + (int) ((30.0/17) * (double) lev);
         speed = (int) (Math.random()*(level/2.5)) + (int) ((90.0/17) * (double) lev);
-        HPBattle = HPFull;
+        
+        setType("Electric");
+        setHP(HPFull);
+        setAttack(attack);
+        setDefense(defense);
+        setSpeed(speed);
     }
     public void gainEXP (int points){
         EXP += points;
@@ -36,17 +42,5 @@ public class Pikachu extends Pokemon
     }
     public List<Move> getListOfAttacks() {
         return attacks;
-    }
-    public int getHPFull() {
-        return HPFull;
-    }
-    public int getHPBattle() {
-        return HPBattle;
-    }
-    public void setHPBattle(int n) {
-        HPBattle = n;
-    }
-    public String getType() {
-        return "Electric";
     }
 }

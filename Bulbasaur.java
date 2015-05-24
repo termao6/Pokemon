@@ -13,9 +13,9 @@ public class Bulbasaur extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Bulbasaur (int lev){
+        super(lev);
         attacks.add(new Move("Tackle", "Normal", 35));
         attacks.add(new Move("Growl", "Normal", 0));
-        level = lev;
         HPFull = (int) (Math.random()*(level/3)) + (int) ((45.0/9) * (double) lev);
         attack = (int) (Math.random()*(level/4)) + (int) ((49.0/17) * (double) lev);
         defense = (int) (Math.random()*(level/4)) + (int) ((49.0/17) * (double) lev);
