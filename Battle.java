@@ -10,6 +10,8 @@ public class Battle
     Trainer t;
     Pokemon opponent;
     Pokemon current;
+    boolean battleEnd = false;
+    boolean win = false;
     
     public Battle(Trainer t2, Pokemon cur, Pokemon opp)
     {
@@ -31,11 +33,21 @@ public class Battle
             damageDone = (int) (damageDone * (double)(4/3));
         }
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
+        
+        if (attacked.getHPBattle() == 0){
+            if (attacked == current)
+                win = true;
+            battleEnd = true;
+        }
     }
     
     public void catchPokemon() 
     {
-        
+        int catchRate = opponent.getHPFull()/opponent.getHPBattle();
+        if (catchRate * Math.random() > 1){
+            t.caughtPokemon(opponent);
+            battleEnd = true;
+        }
     }
     
     public void switchPokemon(int ind)
