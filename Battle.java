@@ -30,12 +30,13 @@ public class Battle
             damageDone = (int) (damageDone * (2/3.));
         }
         if (effect == 3) {
-            damageDone = (int) (damageDone * (double)(4/3));
+            damageDone = (int) (damageDone * (4/3.));
         }
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
         
-        if (attacked.getHPBattle() == 0){
-            if (attacked == current)
+        if (attacked.getHPBattle() <= 0){
+            attacked.setHPBattle(0);
+            if (attacked == opponent)
                 win = true;
             battleEnd = true;
         }
