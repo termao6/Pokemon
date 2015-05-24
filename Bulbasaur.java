@@ -7,7 +7,7 @@
  */
 
 import java.util.*;
-public class Bulbasaur implements Pokemon
+public class Bulbasaur extends Pokemon
 {
     private int level, EXP;
     private int HPFull, HPBattle, attack, defense, speed;
@@ -20,7 +20,12 @@ public class Bulbasaur implements Pokemon
         attack = (int) (Math.random()*(level/4)) + (int) ((49.0/17) * (double) lev);
         defense = (int) (Math.random()*(level/4)) + (int) ((49.0/17) * (double) lev);
         speed = (int) (Math.random()*(level/4.5)) + (int) ((45.0/17) * (double) lev);
-        HPBattle = HPFull;
+        
+        setType("Grass");
+        setHP(HPFull);
+        setAttack(attack);
+        setDefense(defense);
+        setSpeed(speed);
     }
     public void gainEXP(int points) {
         EXP += points;
@@ -36,5 +41,4 @@ public class Bulbasaur implements Pokemon
     public List<Move> getListOfAttacks() {
         return attacks;
     }
-    
 }

@@ -9,16 +9,102 @@ import java.util.*;
 public abstract class Pokemon
 {
     private int level;
+    private int HPFull, HPBattle; //HPFull = total HP, HPBattle = HP remaining in battle
+    private int attack, defense, speed; //Pokemon stats
+    private String type;
     public Pokemon (int lev) {
         level = lev;
     }
-    public abstract void gainEXP(int points);
-    public abstract int getHPBattle();
-    public abstract int getHPFull();
-    public abstract void setHPBattle(int n);
-    public int getLevel() {
+    
+    
+    /***
+     * set HPFull and HPBattle
+     */
+    public void setHP(int HPF){
+        HPFull = HPF;
+        HPBattle = HPFull;
+    }
+    
+    /***
+     * set attack stat
+     */
+    public void setAttack(int att){
+        attack = att;
+    }
+    
+    /***
+     * set defense stat
+     */
+    public void setDefense(int def){
+        defense = def;
+    }
+    
+    /***
+     * set speed stat
+     */
+    public void setSpeed(int spd){
+        speed = spd;
+    }
+    
+    public void setType(String ty){
+        type = ty;
+    }
+    
+    
+    /***
+     * returns level
+     */
+    public int getLevel(){
         return level;
     }
+    
+    /***
+     * returns total HP
+     */
+    public int getHPFull(){
+        return HPFull;
+    }
+    
+    /***
+     * returns how much HP is left for that Pokemon
+     */
+    public int getHPBattle(){
+        return HPBattle;
+    }
+    
+    /***
+     * returns attack stat to calculate damage
+     */
+    public int getBaseAttack(){
+        return attack;
+    }
+    
+    /***
+     * returns defense stat to calculate damage
+     */
+    public int getBaseDefense(){
+        return defense;
+    }
+    
+    /***
+     * returns speed to determine who goes first
+     */
+    public int getspeed(){
+        return speed;
+    }
+    
+    public String getType(){
+        return type;
+    }
+    
+    
+    public void setHPBattle(int HPB){
+        if (HPB < 0)
+            HPBattle = 0;
+        else
+            HPBattle = HPB;
+    }
+    
+    public abstract void gainEXP(int points);
     public abstract List<Move> getListOfAttacks();
-    public abstract String getType();
 }

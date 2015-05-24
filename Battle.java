@@ -21,19 +21,16 @@ public class Battle
     public void attack(Pokemon attacker, Pokemon attacked, Move move)
     {
         int baseDamage = move.getBaseAttack();
-        int effect = move.getLevelOfEffectiveness();
-        int damageDone;
+        double attDef = (double) attacker.getBaseAttack()/attacked.getBaseDefense();
+        int effect = move.levelOfEffectiveness(attacked);
+        int damageDone = (int) (baseDamage * attDef* (attacker.getLevel()/25.));
         if (effect == 1) {
-            damageDone = baseDamage * (double)(2/3);
-        }
-        if (effect == 2) {
-            damageDone = baseDamage;
+            damageDone = (int) (damageDone * (2/3.));
         }
         if (effect == 3) {
-            damageDone = baseDamage * (double)(4/3);
+            damageDone = (int) (damageDone * (double)(4/3));
         }
-        attacked.setBattleHP(attacked.getBattleHP()-damageDone);
-        attacker.gainEXP();
+        attacked.setHPBattle(attacked.getHPBattle()-damageDone);
     }
     
     public void catchPokemon() 
