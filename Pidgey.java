@@ -29,7 +29,7 @@ public class Pidgey extends Pokemon
     }
     public void gainEXP(int points) {
         EXP += points;
-        if ((EXP-level)/3 > level) {
+        if ((EXP-level)/2.5 > level) {
             level++;
             HPFull += (int) (Math.random()*(level/3.5));
             attack += (int) (Math.random()*(level/4.5));
@@ -40,6 +40,9 @@ public class Pidgey extends Pokemon
     }
     public List<Move> getListOfAttacks() {
         return attacks;
+    }
+    public int giveEXP() {
+        return (int) (Math.pow(level, 1.7)*5);
     }
     
 }
