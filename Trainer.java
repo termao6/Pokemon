@@ -9,9 +9,9 @@ import java.util.*;
 public class Trainer
 {
     private List<Pokemon> list;
-    public Trainer(List<Pokemon> l)
+    public Trainer(Pokemon starter)
     {
-        list = l;
+        list.add(starter);
     }
     
     public void caughtPokemon(Pokemon poke) {

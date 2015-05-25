@@ -55,6 +55,10 @@ public class Battle
         current = t.getList().get(ind);
     }
     
+    public void run() {
+        battleEnd = (Math.random() < .8);        
+    }
+    
     public void setOpponent(Pokemon p){
         opponent = p;
     }

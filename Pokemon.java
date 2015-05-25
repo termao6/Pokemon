@@ -12,6 +12,7 @@ public abstract class Pokemon
     private int HPFull, HPBattle; //HPFull = total HP, HPBattle = HP remaining in battle
     private int attack, defense, speed; //Pokemon stats
     private String type; // Type of the Pokemon
+    private boolean fainted = false; // can the Pokemon still be in play? (false = yes)
     public Pokemon (int lev) {
         level = lev;
     }
@@ -104,6 +105,16 @@ public abstract class Pokemon
         else
             HPBattle = HPB;
     }
+    
+    // control fainted status
+    public void faint() {
+        fainted = true;
+    }
+    
+    public void reviv(){
+        fainted = false;
+    }
+    
     
     public abstract void gainEXP(int points);
     public abstract List<Move> getListOfAttacks();

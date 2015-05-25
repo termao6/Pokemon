@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=l
-comment0.target=Trainer(java.util.List)
+comment0.params=starter
+comment0.target=Trainer(Pokemon)
 comment1.params=poke
 comment1.target=void\ caughtPokemon(Pokemon)
 comment2.params=
