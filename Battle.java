@@ -59,6 +59,21 @@ public class Battle
         battleEnd = (Math.random() < .8);        
     }
     
+    /**
+     * true = battle continuing
+     * false = battle is finished; time to start a new battle
+     */
+    public boolean endOfRound() {
+        if (battleEnd && win) {
+            current.gainEXP(opponent.giveEXP());
+        }
+        return !battleEnd;
+    }
+    
+    public boolean win() {
+        return win;
+    }
+    
     public void setOpponent(Pokemon p){
         opponent = p;
     }

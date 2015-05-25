@@ -54,12 +54,13 @@ public class RunnerNoGUI
         // Commence battles
         boolean quit = false;
         int battleCtr = 1;
+        int adder = 0;
         while (!quit) {
             
             // Generate random opponent
             Pokemon opponent;
             double rand = Math.random()*5.5;
-            int lev = (int) (Math.random()*3) - 1 + starter.getLevel();
+            int lev = (int) (Math.random()*3) - 1 + starter.getLevel() + adder;
             if (rand<1) {
                 opponent = new Bulbasaur(lev);
             }
@@ -86,9 +87,11 @@ public class RunnerNoGUI
             
             // Choices - what player can do
             String opt = "";
-            System.out.print("Attack, Switch (Pokemon), Catch, or Run: ");
-            if (opt.toLowerCase().equals("run"))
+            System.out.print("Attack, Switch (your Pokemon), Catch, or Run: ");
+            if (opt.toLowerCase().equals("run")) {
                 bat.run();
+                adder--;
+            }
             else if (opt.toLowerCase().equals("catch"))
                 bat.catchPokemon();
             else if (opt.toLowerCase().equals("switch")) {
@@ -96,6 +99,16 @@ public class RunnerNoGUI
                 System.out.println("To choose the first pokemon, press 1; ");
                 System.out.println("To choose the second pokemon, press 2; ");
                 System.out.println("and etc.");
+                int pok = sc.nextInt();
+                
+                while (pok > player.getList().size()) {
+                    System.out.println("Invalid choice. Choose again: ");
+                    pok = sc.nextInt();
+                }
+                bat.switchPokemon(pok-1);
+            }
+            else { // attack
+                
             }
             
             battleCtr++;

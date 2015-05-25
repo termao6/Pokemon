@@ -106,12 +106,16 @@ public abstract class Pokemon
             HPBattle = HPB;
     }
     
+    public int giveEXP() {
+        return (int) (Math.pow(level, 1.7)*7);
+    }
+    
     // control fainted status
     public void faint() {
         fainted = true;
     }
     
-    public void reviv(){
+    public void revive(){
         fainted = false;
     }
     
