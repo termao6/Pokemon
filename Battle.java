@@ -56,6 +56,10 @@ public class Battle
         current = t.getList().get(ind);
     }
     
+    public void setOpponent(Pokemon p){
+        opponent = p;
+    }
+    
     public Pokemon getCurrent() {
         return current;
     }
