@@ -11,7 +11,7 @@ public abstract class Pokemon
     private int level;
     private int HPFull, HPBattle; //HPFull = total HP, HPBattle = HP remaining in battle
     private int attack, defense, speed; //Pokemon stats
-    private String type;
+    private String type; // Type of the Pokemon
     public Pokemon (int lev) {
         level = lev;
     }

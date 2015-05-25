@@ -35,7 +35,6 @@ public class Battle
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
         
         if (attacked.getHPBattle() <= 0){
-            attacked.setHPBattle(0);
             if (attacked == opponent)
                 win = true;
             battleEnd = true;
