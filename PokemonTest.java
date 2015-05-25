@@ -81,17 +81,39 @@ public class PokemonTest extends JPanel implements ActionListener
         int oppNum = (int)(Math.random() * 5);
         Pokemon current;
         Pokemon opponent;
+        String opp;
+        if (oppNum == 0) {
+            opponent = new Pikachu(5);
+            opp = "Pikachu";
+        }
+        else if (oppNum == 1) {
+            opponent = new Squirtle(5);
+            opp = "Squirtle";
+        }
+        else if (oppNum == 2) {
+            opponent = new Bulbasaur(5);
+            opp = "Bulbasaur";
+        }
+        else if (oppNum == 3) {
+            opponent = new Pidgey(5);
+            opp = "Pidgey";
+        }
+        else {
+            opponent = new Charmander(5);
+            opp = "Charmander";
+        }
+        System.out.println("Opponent Pokemon: " + opp);
         System.out.println("Choose a starter Pokemon and an action: ");
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     createAndShowGUI();
                 }
             });
-        if (pokemonName.equals("Pikachu")) current = new Pikachu(5);
-        if (pokemonName.equals("Squirtle")) current = new Squirtle(5);
-        if (pokemonName.equals("Bulbasaur")) current = new Bulbasaur(5);
-        if (pokemonName.equals("Pidgey")) current = new Pidgey(5);
-        if (pokemonName.equals("Charmander")) current = new Charmander(5);
-        System.out.println("You have chosen " + pokemonName + " as your starter Pokemon.");
+//         if (pokemonName.equals("Pikachu")) current = new Pikachu(5);
+//         if (pokemonName.equals("Squirtle")) current = new Squirtle(5);
+//         if (pokemonName.equals("Bulbasaur")) current = new Bulbasaur(5);
+//         if (pokemonName.equals("Pidgey")) current = new Pidgey(5);
+//         if (pokemonName.equals("Charmander")) current = new Charmander(5);
+//         System.out.println("You have chosen " + pokemonName + " as your starter Pokemon.");
     }
 }
