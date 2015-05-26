@@ -42,6 +42,6 @@ public class Charmander extends Pokemon
         return attacks;
     }
     public String getName() {
-        return "CHARMANDER";
+        return ("CHARMANDER" + "(Lv " + level + ")");
     }
 }

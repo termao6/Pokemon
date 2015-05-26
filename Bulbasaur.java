@@ -42,6 +42,6 @@ public class Bulbasaur extends Pokemon
         return attacks;
     }
     public String getName() {
-        return "BULBASAUR";
+        return ("BULBASAUR" + "(Lv " + level + ")");
     }
 }

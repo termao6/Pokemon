@@ -29,7 +29,7 @@ public class Trainer
     public String getPokeList() {
         String poke = "";
         for(Pokemon pok : list) {
-            poke += pok.getName() + " " + pok.getLevel() + "\n";
+            poke += pok.getName() + "\n";
         }
         return poke;
     }

@@ -45,6 +45,6 @@ public class Pidgey extends Pokemon
         return (int) (Math.pow(level, 1.7)*5);
     }
     public String getName() {
-        return "PIDGEY";
+        return ("PIDGEY" + "(Lv " + level + ")");
     }
 }

@@ -44,6 +44,6 @@ public class Pikachu extends Pokemon
         return attacks;
     }
     public String getName() {
-        return "PIKACHU";
+        return ("PIKACHU" + "(Lv " + level + ")");
     }
 }
