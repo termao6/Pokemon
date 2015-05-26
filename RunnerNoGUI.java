@@ -92,7 +92,11 @@ public class RunnerNoGUI
             
             // Choices - what player can do
             String opt = "";
-            System.out.print("Attack, Switch (your Pokemon), Catch, or Run: ");
+            System.out.println("What will " + starter.getName() + " do?");
+            System.out.println("1 Attack");
+            System.out.println("2 Switch Pokemon");
+            System.out.println("3 Catch");
+            System.out.println("4 Run");
             if (opt.toLowerCase().equals("run")) {
                 bat.run();
                 adder--;
@@ -100,6 +104,7 @@ public class RunnerNoGUI
             else if (opt.toLowerCase().equals("catch"))
                 bat.catchPokemon();
             else if (opt.toLowerCase().equals("switch")) {
+                System.out.println("Which Pokemon will you send out?");
                 System.out.println(player.getList());
                 System.out.println("To choose the first pokemon, press 1; ");
                 System.out.println("To choose the second pokemon, press 2; ");
