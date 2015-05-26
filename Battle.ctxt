@@ -4,11 +4,11 @@ comment0.target=Battle(Trainer,\ Pokemon,\ Pokemon)
 comment1.params=attacker\ attacked\ move
 comment1.target=void\ attack(Pokemon,\ Pokemon,\ Move)
 comment2.params=
-comment2.target=void\ catchPokemon()
+comment2.target=boolean\ catchPokemon()
 comment3.params=ind
 comment3.target=void\ switchPokemon(int)
 comment4.params=
-comment4.target=void\ run()
+comment4.target=boolean\ run()
 comment5.params=
 comment5.target=boolean\ continueBattle()
 comment5.text=\n\ true\ \=\ battle\ continuing\n\ false\ \=\ battle\ is\ finished;\ time\ to\ start\ a\ new\ battle\n

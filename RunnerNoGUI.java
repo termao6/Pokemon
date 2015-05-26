@@ -25,6 +25,7 @@ public class RunnerNoGUI
             System.out.println("3 Squirtle");
             System.out.println("4 Pidgey");
             System.out.println("5 Pikachu");
+            System.out.print(">> ");
             starting = sc.nextInt();
 
             if (starting == 1) {
@@ -107,13 +108,27 @@ public class RunnerNoGUI
                 System.out.println("2 Switch Pokemon");
                 System.out.println("3 Catch");
                 System.out.println("4 Run");
+                System.out.print(">> ");
                 opt = sc.nextInt();
                 if (opt == 4) {
-                    bat.run();
+                    boolean r = bat.run();
+                    if (r) {
+                        System.out.println("Ran away successfully!");
+                    }
+                    else {
+                        System.out.println("Run away unsuccessful! :(");
+                    }
                     adder-=2;
                 }
-                else if (opt == 3)
-                    bat.catchPokemon();
+                else if (opt == 3) {
+                    boolean c = bat.catchPokemon();
+                    if (c) {
+                        System.out.println("Congratulations! You have successfully caught a " + opponent.getName() + "!");
+                    }
+                    else {
+                        System.out.println("Catch unsuccessful! :(");
+                    }
+                }
                 else if (opt == 2) {
                     System.out.println("Choose a Pokemon");
                     System.out.println(player.getPokeList());
@@ -143,6 +158,7 @@ public class RunnerNoGUI
             // Quit?
             System.out.println();
             System.out.println("QUIT? (y/n)");
+            System.out.print(">> ");
             String q = sc.next().toLowerCase();
             if (q.equals("y")) {
                 quit = true;

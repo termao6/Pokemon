@@ -41,13 +41,15 @@ public class Battle
         }
     }
     
-    public void catchPokemon() 
+    public boolean catchPokemon() 
     {
         int catchRate = opponent.getHPFull()/opponent.getHPBattle();
         if (catchRate * Math.random() > 1){
             t.caughtPokemon(opponent);
             battleEnd = true;
+            return true;
         }
+        return false;
     }
     
     public void switchPokemon(int ind)
@@ -55,8 +57,9 @@ public class Battle
         current = t.getList().get(ind);
     }
     
-    public void run() {
-        battleEnd = (Math.random() < .8);        
+    public boolean run() {
+        battleEnd = (Math.random() < .6);
+        return battleEnd;
     }
     
     /**
