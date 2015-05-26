@@ -43,4 +43,7 @@ public class Pikachu extends Pokemon
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+    public String getName() {
+        return "PIKACHU";
+    }
 }

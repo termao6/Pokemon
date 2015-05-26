@@ -122,4 +122,5 @@ public abstract class Pokemon
     
     public abstract void gainEXP(int points);
     public abstract List<Move> getListOfAttacks();
+    public abstract String getName();
 }

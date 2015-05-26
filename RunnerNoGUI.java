@@ -15,6 +15,9 @@ public class RunnerNoGUI
         Trainer player;  // person playing
         Pokemon starter = new Pidgey(1); // trainer's first pokemon (to be overridden)
         
+        
+        // **************Choose Starter*****************************
+        
         String st = "";
         boolean valid = false;
         while (!valid){
@@ -51,7 +54,8 @@ public class RunnerNoGUI
         player = new Trainer(starter);
         
         
-        // Commence battles
+        // ******************Commence battles*********************
+        
         boolean quit = false;
         int battleCtr = 1;
         int adder = 0;
@@ -84,6 +88,7 @@ public class RunnerNoGUI
             System.out.println();
             
             Battle bat = new Battle(player, starter, opponent);
+            System.out.println("A wild " + opponent.getName() + " appeared!");
             
             // Choices - what player can do
             String opt = "";
@@ -107,8 +112,11 @@ public class RunnerNoGUI
                 }
                 bat.switchPokemon(pok-1);
             }
-            else { // attack
+            else if (opt.toLowerCase().equals("attack")) {
                 
+            }
+            else {
+                System.out.println("Invalid choice. Please try again.");
             }
             
             battleCtr++;
