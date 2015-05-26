@@ -42,6 +42,6 @@ public class Squirtle extends Pokemon
         return attacks;
     }
     public String getName() {
-        return ("SQUIRTLE" + "(Lv " + level + ")");
+        return ("SQUIRTLE" + " (Lv " + getLevel() + ")");
     }
 }

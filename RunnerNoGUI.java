@@ -53,6 +53,7 @@ public class RunnerNoGUI
         }
 
         System.out.println("Congratulation! Your first Pokemon is a " + starter.getName() + "!");
+        System.out.println();
         player = new Trainer(starter);
 
         Pokemon current = starter; // current = player's pokemon 
@@ -85,13 +86,14 @@ public class RunnerNoGUI
             }
 
             // Start Battle
-            System.out.println("********");
+            System.out.println("*********");
             System.out.println("Battle #" + battleCtr);
-            System.out.println("********");
+            System.out.println("*********");
             System.out.println();
 
             Battle bat = new Battle(player, starter, opponent);
             System.out.println("A wild " + opponent.getName() + " appeared!");
+            System.out.println();
 
             // for one battle (until battleEnd)
 
@@ -140,7 +142,7 @@ public class RunnerNoGUI
 
             // Quit?
             System.out.println();
-            System.out.print("QUIT? (y/n)");
+            System.out.println("QUIT? (y/n)");
             String q = sc.next().toLowerCase();
             if (q.equals("y")) {
                 quit = true;
