@@ -8,7 +8,7 @@
 import java.util.*;
 public class Trainer
 {
-    private List<Pokemon> list;
+    private List<Pokemon> list = new ArrayList<Pokemon>();
     public Trainer(Pokemon starter)
     {
         list.add(starter);
