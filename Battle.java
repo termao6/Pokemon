@@ -63,7 +63,7 @@ public class Battle
      * true = battle continuing
      * false = battle is finished; time to start a new battle
      */
-    public boolean endOfRound() {
+    public boolean continueBattle() {
         if (battleEnd && win) {
             current.gainEXP(opponent.giveEXP());
         }

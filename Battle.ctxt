@@ -10,7 +10,7 @@ comment3.target=void\ switchPokemon(int)
 comment4.params=
 comment4.target=void\ run()
 comment5.params=
-comment5.target=boolean\ endOfRound()
+comment5.target=boolean\ continueBattle()
 comment5.text=\r\n\ true\ \=\ battle\ continuing\r\n\ false\ \=\ battle\ is\ finished;\ time\ to\ start\ a\ new\ battle\r\n
 comment6.params=
 comment6.target=boolean\ win()

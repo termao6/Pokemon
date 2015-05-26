@@ -11,37 +11,39 @@ public class RunnerNoGUI
 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        
+
         Trainer player;  // person playing
         Pokemon starter = new Pidgey(1); // trainer's first pokemon (to be overridden)
-        
-        
+
         // **************Choose Starter*****************************
-        
-        String st = "";
+        int starting = 0;
         boolean valid = false;
         while (!valid){
             System.out.println("Choose your starter Pokemon: ");
-            System.out.print("Bulbasaur, Charmander, Squirtle, Pidgey, or Pikachu");
-            st = sc.next();
+            System.out.println("1 Bulbasaur");
+            System.out.println("2 Charmander");
+            System.out.println("3 Squirtle");
+            System.out.println("4 Pidgey");
+            System.out.println("5 Pikachu");
+            starting = sc.nextInt();
 
-            if (st.toLowerCase().equals("bulbasaur")) {
+            if (starting == 1) {
                 starter = new Bulbasaur(5);
                 valid = true;
             }
-            else if (st.toLowerCase().equals("charmander")) {
+            else if (starting == 2) {
                 starter = new Charmander(5);
                 valid = true;
             }
-            else if (st.toLowerCase().equals("squirtle")) {
+            else if (starting == 3) {
                 starter = new Squirtle(5);
                 valid = true;
             }
-            else if (st.toLowerCase().equals("pidgey")) {
+            else if (starting == 4) {
                 starter = new Pidgey(5);
                 valid = true;
             }
-            else if (st.toLowerCase().equals("pikachu")) {
+            else if (starting == 5) {
                 starter = new Pikachu(5);
                 valid = true;
             }
@@ -49,18 +51,19 @@ public class RunnerNoGUI
                 System.out.println("Invalid choice. Please try again.");
             }
         }
-        
-        System.out.println("Congratulation! Your first Pokemon is a " + st + "!");
+
+        System.out.println("Congratulation! Your first Pokemon is a " + starter.getName() + "!");
         player = new Trainer(starter);
         
-        
+        Pokemon current = starter; // current = player's pokemon 
+                                    // that is currently in battle
+
         // ******************Commence battles*********************
-        
         boolean quit = false;
         int battleCtr = 1;
         int adder = 0;
         while (!quit) {
-            
+
             // Generate random opponent
             Pokemon opponent;
             double rand = Math.random()*5.5;
@@ -80,52 +83,63 @@ public class RunnerNoGUI
             else {
                 opponent = new Pidgey(lev);
             }
-            
+
             // Start Battle
             System.out.println("********");
             System.out.println("Battle #" + battleCtr);
             System.out.println("********");
             System.out.println();
-            
+
             Battle bat = new Battle(player, starter, opponent);
             System.out.println("A wild " + opponent.getName() + " appeared!");
+
+            // for one battle (until battleEnd)
             
-            // Choices - what player can do
-            String opt = "";
-            System.out.println("What will " + starter.getName() + " do?");
-            System.out.println("1 Attack");
-            System.out.println("2 Switch Pokemon");
-            System.out.println("3 Catch");
-            System.out.println("4 Run");
-            if (opt.toLowerCase().equals("run")) {
-                bat.run();
-                adder--;
-            }
-            else if (opt.toLowerCase().equals("catch"))
-                bat.catchPokemon();
-            else if (opt.toLowerCase().equals("switch")) {
-                System.out.println("Which Pokemon will you send out?");
-                System.out.println(player.getList());
-                System.out.println("To choose the first pokemon, press 1; ");
-                System.out.println("To choose the second pokemon, press 2; ");
-                System.out.println("and etc.");
-                int pok = sc.nextInt();
-                
-                while (pok > player.getList().size()) {
-                    System.out.println("Invalid choice. Choose again: ");
-                    pok = sc.nextInt();
+            boolean continueBat = true;
+            while (continueBat) {
+
+                // Choices - what player can do
+                int opt = 0;
+                System.out.println("What will " + current.getName() + " do?");
+                System.out.println("1 Attack");
+                System.out.println("2 Switch Pokemon");
+                System.out.println("3 Catch");
+                System.out.println("4 Run");
+                opt = sc.nextInt();
+                if (opt == 4) {
+                    bat.run();
+                    adder-=2;
                 }
-                bat.switchPokemon(pok-1);
+                else if (opt == 3)
+                    bat.catchPokemon();
+                else if (opt == 2) {
+                    System.out.println("Choose a Pokemon");
+                    System.out.println(player.getPokeList());
+                    System.out.println("To choose the first pokemon, press 1; ");
+                    System.out.println("To choose the second pokemon, press 2; ");
+                    System.out.println("and etc.");
+                    int pok = sc.nextInt();
+
+                    while (pok > player.getList().size() || pok < 1) {
+                        System.out.println("Invalid choice. Choose again: ");
+                        pok = sc.nextInt();
+                    }
+                    bat.switchPokemon(pok-1);
+                }
+                else if (opt == 1) {
+                    System.out.println(current.getListOfAttacks());
+                }
+                else {
+                    while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
+                        System.out.println("Invalid choice. Choose again: ");
+                        opt = sc.nextInt();
+                    }
+                }
+                continueBat = bat.continueBattle();
             }
-            else if (opt.toLowerCase().equals("attack")) {
-                
-            }
-            else {
-                System.out.println("Invalid choice. Please try again.");
-            }
-            
+            adder++;
             battleCtr++;
         }
-        
+
     }
 }

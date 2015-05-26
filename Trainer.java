@@ -22,4 +22,15 @@ public class Trainer
     {
         return list;
     }
+    
+    /**
+     * returns name and level of all of Trainer's pokemon
+     */
+    public String getPokeList() {
+        String poke = "";
+        for(Pokemon pok : list) {
+            poke += pok.getName() + " " + pok.getLevel() + "\n";
+        }
+        return poke;
+    }
 }
