@@ -53,7 +53,7 @@ public class RunnerNoGUI
             }
         }
 
-        System.out.println("Congratulation! Your first Pokemon is a " + starter.getName() + "!");
+        System.out.println("Congratulations! Your first Pokemon is a " + starter.getName() + "!");
         System.out.println();
         player = new Trainer(starter);
 
@@ -146,7 +146,21 @@ public class RunnerNoGUI
                     bat.switchPokemon(pok-1);
                 }
                 else if (opt == 1) {
+                    System.out.println("Choose an attack: ");
                     System.out.println(current.movesToString());
+                    int moveInd = sc.nextInt();
+                    if (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
+                        while (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
+                            System.out.println("Invalid choice. Choose again: ");
+                            moveInd = sc.nextInt();
+                        }
+                    }
+                    else {
+                        Move selected = current.getListOfAttacks().get(moveInd);
+                        int turnCtr = 1; //current attacks on odd-numbered turns, opponent attacks on even
+                        
+                        
+                    }
                 }
                 else {
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
@@ -157,7 +171,7 @@ public class RunnerNoGUI
                 continueBat = bat.continueBattle();
             }
 
-            // Quit?
+            // Quit option
             System.out.println();
             System.out.println("QUIT? (y/n)");
             System.out.print(">> ");

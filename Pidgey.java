@@ -43,8 +43,10 @@ public class Pidgey extends Pokemon
     }
     public String movesToString() {
         String m = "";
+        int ctr = 1;
         for (Move mov : attacks) {
-            m += mov.getName() + "\n";
+            m += ctr + " " + mov.getName() + "\n";
+            ctr++;
         }
         return m;
     }

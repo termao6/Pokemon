@@ -1,7 +1,7 @@
 
 /**
  * Write a description of class Move here.
- * 
+ * Move class can be instantiated to create a move (or attack) that Pokemon can perform
  * @author (your name) Teresa Mao, Amber Hu
  * @version (a version number or a date) 5/18/2015
  */
@@ -30,7 +30,7 @@ public class Move
         return baseAttack;
     }
     
-    public int levelOfEffectiveness(Pokemon p) { // 1 = not effective, 2 = medium, 3 = very effective
+    public int levelOfEffectiveness(Pokemon p) { // measures level of effectiveness of move on pokemon type; 1 = not effective, 2 = medium effectiveness, 3 = very effective
         String type2 = p.getType();
         
         if (type.equals("Normal") || type2.equals("Normal")) {
