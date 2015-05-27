@@ -41,6 +41,13 @@ public class Pidgey extends Pokemon
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+    public String movesToString() {
+        String m = "";
+        for (Move mov : attacks) {
+            m += mov.getName() + "\n";
+        }
+        return m;
+    }
     public int giveEXP() {
         return (int) (Math.pow(level, 1.7)*5);
     }

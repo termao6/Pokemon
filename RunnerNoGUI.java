@@ -110,20 +110,21 @@ public class RunnerNoGUI
                 System.out.println("4 Run");
                 System.out.print(">> ");
                 opt = sc.nextInt();
+                System.out.println();
                 if (opt == 4) {
                     boolean r = bat.run();
                     if (r) {
-                        System.out.println("Ran away successfully!");
+                        System.out.println("Got away safely");
                     }
                     else {
-                        System.out.println("Run away unsuccessful! :(");
+                        System.out.println("Couldn't escape!");
                     }
                     adder-=2;
                 }
                 else if (opt == 3) {
                     boolean c = bat.catchPokemon();
                     if (c) {
-                        System.out.println("Congratulations! You have successfully caught a " + opponent.getName() + "!");
+                        System.out.println("Congratulations! You have caught a " + opponent.getName() + "!");
                     }
                     else {
                         System.out.println("Catch unsuccessful! :(");
@@ -131,10 +132,11 @@ public class RunnerNoGUI
                 }
                 else if (opt == 2) {
                     System.out.println("Choose a Pokemon");
-                    System.out.println(player.getPokeList());
+                    System.out.print(player.getPokeList());
                     System.out.println("To choose the first pokemon, press 1; ");
                     System.out.println("To choose the second pokemon, press 2; ");
                     System.out.println("and etc.");
+                    System.out.print(">> ");
                     int pok = sc.nextInt();
 
                     while (pok > player.getList().size() || pok < 1) {
@@ -144,7 +146,7 @@ public class RunnerNoGUI
                     bat.switchPokemon(pok-1);
                 }
                 else if (opt == 1) {
-                    System.out.println(current.getListOfAttacks());
+                    System.out.println(current.movesToString());
                 }
                 else {
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {

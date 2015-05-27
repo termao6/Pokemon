@@ -17,15 +17,19 @@ public class Move
         type = t;
         baseAttack = ba;
     }
+    
     public String getName() {
         return name;
     }
+    
     public String getType() {
         return type;
     }
+    
     public int getBaseAttack() {
         return baseAttack;
     }
+    
     public int levelOfEffectiveness(Pokemon p) { // 1 = not effective, 2 = medium, 3 = very effective
         String type2 = p.getType();
         

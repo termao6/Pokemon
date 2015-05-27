@@ -41,6 +41,13 @@ public class Bulbasaur extends Pokemon
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+    public String movesToString() {
+        String m = "";
+        for (Move mov : attacks) {
+            m += mov.getName() + "\n";
+        }
+        return m;
+    }
     public String getName() {
         return ("BULBASAUR" + " (Lv " + getLevel() + ")");
     }

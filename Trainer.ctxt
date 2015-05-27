@@ -7,5 +7,5 @@ comment2.params=
 comment2.target=java.util.List\ getList()
 comment3.params=
 comment3.target=java.lang.String\ getPokeList()
-comment3.text=\n\ returns\ name\ and\ level\ of\ all\ of\ Trainer's\ pokemon\n
+comment3.text=\r\n\ returns\ name\ and\ level\ of\ all\ of\ Trainer's\ pokemon\r\n
 numComments=4
