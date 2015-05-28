@@ -111,7 +111,7 @@ public class RunnerNoGUI
                 System.out.print(">> ");
                 opt = sc.nextInt();
                 System.out.println();
-                if (opt == 4) {
+                if (opt == 4) { // Run
                     boolean r = bat.run();
                     if (r) {
                         System.out.println("Got away safely");
@@ -121,7 +121,7 @@ public class RunnerNoGUI
                     }
                     adder-=2;
                 }
-                else if (opt == 3) {
+                else if (opt == 3) { // Catch
                     boolean c = bat.catchPokemon();
                     if (c) {
                         System.out.println("Congratulations! You have caught a " + opponent.getName() + "!");
@@ -130,7 +130,7 @@ public class RunnerNoGUI
                         System.out.println("Catch unsuccessful! :(");
                     }
                 }
-                else if (opt == 2) {
+                else if (opt == 2) { // Switch
                     System.out.println("Choose a Pokemon");
                     System.out.print(player.getPokeList());
                     System.out.println("To choose the first pokemon, press 1; ");
@@ -145,20 +145,18 @@ public class RunnerNoGUI
                     }
                     bat.switchPokemon(pok-1);
                 }
-                else if (opt == 1) {
+                else if (opt == 1) { // Attack
                     System.out.println("Choose an attack: ");
                     System.out.println(current.movesToString());
-                    int moveInd = sc.nextInt();
-                    if (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
+                    int moveInd = sc.nextInt()-1;
+                    if (moveInd > current.getListOfAttacks().size() || moveInd < 0) {
                         while (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
                             System.out.println("Invalid choice. Choose again: ");
-                            moveInd = sc.nextInt();
+                            moveInd = sc.nextInt()-1;
                         }
                     }
-                    else {
-                        Move selected = current.getListOfAttacks().get(moveInd);
-                        bat.attack(current, opponent, selected);
-                    }
+                    Move selected = current.getListOfAttacks().get(moveInd);
+                    bat.attack(current, opponent, selected);
                 }
                 else {
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
@@ -167,6 +165,12 @@ public class RunnerNoGUI
                     }
                 }
                 continueBat = bat.continueBattle();
+
+                // Opponent Attacks if battle continues
+                if (continueBat) {
+                    int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
+                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
+                }
             }
 
             // Quit option

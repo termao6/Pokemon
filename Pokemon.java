@@ -106,9 +106,14 @@ public abstract class Pokemon
             HPBattle = HPB;
     }
     
+    public String HPtoString() {
+        return "HP: " + HPBattle + "/" + HPFull;
+    }
+    
     public int giveEXP() {
         return (int) (Math.pow(level, 1.7)*7);
     }
+    
     
     // control fainted status
     public void faint() {
