@@ -53,7 +53,8 @@ public class RunnerNoGUI
             }
         }
 
-        System.out.println("Congratulation! Your first Pokemon is a " + starter.getName() + "!");
+        System.out.println("Congratulations! Your first Pokemon is a " + starter.getName() + "!");
+        System.out.println(starter.HPtoString());
         System.out.println();
         player = new Trainer(starter);
 
@@ -100,7 +101,10 @@ public class RunnerNoGUI
 
             boolean continueBat = true;
             while (continueBat) {
-
+                System.out.println("Your Pokemon's " + current.HPtoString());
+                System.out.println("Opponent's " + opponent.HPtoString());
+                
+                
                 // Choices - what player can do
                 int opt = 0;
                 System.out.println("What will " + current.getName() + " do?");
@@ -111,7 +115,7 @@ public class RunnerNoGUI
                 System.out.print(">> ");
                 opt = sc.nextInt();
                 System.out.println();
-                if (opt == 4) {
+                if (opt == 4) { // Run
                     boolean r = bat.run();
                     if (r) {
                         System.out.println("Got away safely");
@@ -121,7 +125,7 @@ public class RunnerNoGUI
                     }
                     adder-=2;
                 }
-                else if (opt == 3) {
+                else if (opt == 3) { // Catch
                     boolean c = bat.catchPokemon();
                     if (c) {
                         System.out.println("Congratulations! You have caught a " + opponent.getName() + "!");
@@ -130,7 +134,7 @@ public class RunnerNoGUI
                         System.out.println("Catch unsuccessful! :(");
                     }
                 }
-                else if (opt == 2) {
+                else if (opt == 2) { // Switch
                     System.out.println("Choose a Pokemon");
                     System.out.print(player.getPokeList());
                     System.out.println("To choose the first pokemon, press 1; ");
@@ -145,19 +149,40 @@ public class RunnerNoGUI
                     }
                     bat.switchPokemon(pok-1);
                 }
-                else if (opt == 1) {
+                else if (opt == 1) { // Attack
+                    System.out.println("Choose an attack: ");
                     System.out.println(current.movesToString());
+                    System.out.print(">> ");
+                    int moveInd = sc.nextInt()-1;
+                    System.out.println();
+                    if (moveInd > current.getListOfAttacks().size() || moveInd < 0) {
+                        while (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
+                            System.out.println("Invalid choice. Choose again: ");
+                            moveInd = sc.nextInt()-1;
+                        }
+                    }
+                    Move selected = current.getListOfAttacks().get(moveInd);
+                    bat.attack(current, opponent, selected);
+                    System.out.println(current.getName() + " (you) used " + selected.getName());
                 }
-                else {
+                else { // Not an option
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
                         System.out.println("Invalid choice. Choose again: ");
                         opt = sc.nextInt();
                     }
                 }
                 continueBat = bat.continueBattle();
+
+                // Opponent Attacks if battle continues
+                if (continueBat) {
+                    int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
+                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
+                    System.out.println(opponent.getName() + " used " + opponent.getListOfAttacks().get(oppMoveInd).getName());
+                    System.out.println();
+                }
             }
 
-            // Quit?
+            // Quit option
             System.out.println();
             System.out.println("QUIT? (y/n)");
             System.out.print(">> ");
@@ -174,6 +199,8 @@ public class RunnerNoGUI
                     q = sc.next().toLowerCase();
                 }
             }
+            
+            
             adder++;
             battleCtr++;
         }

@@ -28,9 +28,11 @@ public class Battle
         int damageDone = (int) (baseDamage * attDef* (attacker.getLevel()/25.));
         if (effect == 1) {
             damageDone = (int) (damageDone * (2/3.));
+            System.out.println("It wasn't very effective...");
         }
         if (effect == 3) {
             damageDone = (int) (damageDone * (4/3.));
+            System.out.println("Super effective!");
         }
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
         

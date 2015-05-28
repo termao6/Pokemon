@@ -9,16 +9,16 @@ import java.util.*;
 public class Trainer
 {
     private List<Pokemon> list = new ArrayList<Pokemon>();
-    public Trainer(Pokemon starter)
+    public Trainer(Pokemon starter) //constructor for Trainer class
     {
         list.add(starter);
     }
     
-    public void caughtPokemon(Pokemon poke) {
+    public void caughtPokemon(Pokemon poke) { //adds caught pokemon to Trainer's list
         list.add(poke);
     }
     
-    public List<Pokemon> getList()
+    public List<Pokemon> getList() //returns list of pokemon that Trainer has
     {
         return list;
     }
@@ -26,7 +26,7 @@ public class Trainer
     /**
      * returns name and level of all of Trainer's pokemon
      */
-    public String getPokeList() {
+    public String getPokeList() { 
         String poke = "";
         for(Pokemon pok : list) {
             poke += pok.getName() + "\n";
