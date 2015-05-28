@@ -157,9 +157,7 @@ public class RunnerNoGUI
                     }
                     else {
                         Move selected = current.getListOfAttacks().get(moveInd);
-                        int turnCtr = 1; //current attacks on odd-numbered turns, opponent attacks on even
-                        
-                        
+                        bat.attack(current, opponent, selected);
                     }
                 }
                 else {
