@@ -25,7 +25,7 @@ public class Battle
         int baseDamage = move.getBaseAttack();
         double attDef = (double) attacker.getBaseAttack()/attacked.getBaseDefense();
         int effect = move.levelOfEffectiveness(attacked);
-        int damageDone = (int) (baseDamage * attDef* (attacker.getLevel()/25.));
+        int damageDone = (int) (baseDamage * attDef* (attacker.getLevel()/50.));
         if (effect == 1) {
             damageDone = (int) (damageDone * (2/3.));
             System.out.println("It wasn't very effective...");
@@ -37,6 +37,7 @@ public class Battle
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
         
         if (attacked.getHPBattle() <= 0){
+            attacked.faint();
             if (attacked == opponent)
                 win = true;
             battleEnd = true;

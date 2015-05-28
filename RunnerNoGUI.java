@@ -63,6 +63,7 @@ public class RunnerNoGUI
 
         // ******************Commence battles*********************
         boolean quit = false;
+        boolean won = false;
         int battleCtr = 1;
         int adder = 0;
         while (!quit) {
@@ -103,7 +104,7 @@ public class RunnerNoGUI
             while (continueBat) {
                 System.out.println("Your Pokemon's " + current.HPtoString());
                 System.out.println("Opponent's " + opponent.HPtoString());
-                
+                System.out.println();
                 
                 // Choices - what player can do
                 int opt = 0;
@@ -172,6 +173,7 @@ public class RunnerNoGUI
                     }
                 }
                 continueBat = bat.continueBattle();
+                won = bat.win();
 
                 // Opponent Attacks if battle continues
                 if (continueBat) {
@@ -179,6 +181,21 @@ public class RunnerNoGUI
                     bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
                     System.out.println(opponent.getName() + " used " + opponent.getListOfAttacks().get(oppMoveInd).getName());
                     System.out.println();
+                }
+            }
+            if (won) { // if win, give EXP to winner
+                System.out.println("The wild " + opponent.getName() + " fainted.");
+                System.out.println(current.getName() + " gained " + opponent.giveEXP() + " EXP Points!");
+            }
+            else { // if lose
+                if (player.allFaint()) {
+                    System.out.println("Player is out of usable Pokemon.");
+                    System.out.println("Sorry, you must start over your Pokemon journey.");
+                    System.out.println("Don't worry, though: In this world, you are always 10, so you can play forever.");
+                    quit = true;
+                }
+                else {
+                    
                 }
             }
 

@@ -18,6 +18,20 @@ public class Trainer
         list.add(poke);
     }
     
+    public void healAll() {
+        for (Pokemon pok : list) {
+            pok.heal();
+        }
+    }
+    
+    public boolean allFaint() {
+        for (Pokemon pok : list) {
+            if (!pok.getFaintStatus())
+                return false;
+        }
+        return true;
+    }
+    
     public List<Pokemon> getList() //returns list of pokemon that Trainer has
     {
         return list;

@@ -106,6 +106,10 @@ public abstract class Pokemon
             HPBattle = HPB;
     }
     
+    public void heal() {
+        HPBattle = HPFull;
+    }
+    
     public String HPtoString() {
         return "HP: " + HPBattle + "/" + HPFull;
     }
@@ -122,6 +126,10 @@ public abstract class Pokemon
     
     public void revive(){
         fainted = false;
+    }
+    
+    public boolean getFaintStatus() {
+        return fainted;
     }
     
     
