@@ -157,7 +157,7 @@ public class RunnerNoGUI
                     int moveInd = sc.nextInt()-1;
                     System.out.println();
                     if (moveInd >= current.getListOfAttacks().size() || moveInd < 0) {
-                        while (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
+                        while (moveInd >= current.getListOfAttacks().size() || moveInd <= 0) {
                             System.out.println("Invalid choice. Choose again: ");
                             moveInd = sc.nextInt()-1;
                         }
@@ -176,7 +176,6 @@ public class RunnerNoGUI
 
                 // check status of battle
                 continueBat = bat.continueBattle();
-                
 
                 // **********Opponent Attacks if battle continues**********
                 if (continueBat) {
@@ -185,79 +184,85 @@ public class RunnerNoGUI
                     bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
                     System.out.println();
                 }
-                
+
                 //check if current pokemon has fainted
-                if (current.getFaintStatus())
-                    continueBat = false;
+                if (current.getFaintStatus()) {
+                    if (player.allFaint()) { // no more usable pokemon
+                        System.out.println("Your " + current.getName() + " fainted.");
+                        System.out.println("Player is out of usable Pokemon.");
+                        System.out.println("Sorry, you must start over your Pokemon journey.");
+                        System.out.println("Don't worry, though: In this world, you are always 10, so you can play forever.");
+                        continueBat = false;
+                        quit = true;
+                    }
+                    else {       // current pokemon fainted, but players still has more pokemon
+                        System.out.println("Your " + current.getName() + " fainted.");
+                        System.out.println("Use next Pokemon? (y/n)");
+                        System.out.print(">> ");
+                        String cont = sc.next().toLowerCase();
+                        System.out.println();
+                        if (cont.equals("y")) {                                          // Allows player to switch pokemon
+                            System.out.print(player.getPokeList());
+                            System.out.print(">> ");
+                            int pok = sc.nextInt();
+
+                            while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
+                                System.out.println("Invalid choice. Choose again: ");
+                                pok = sc.nextInt();
+                            }
+                            bat.switchPokemon(pok-1);
+                            current = player.getList().get(pok-1);
+                            continueBat = true;
+                        }
+                        else if (cont.equals("n")) {                               // attempts to run
+                            boolean r = bat.run(runAttempts);
+                            if (r) {
+                                System.out.println("Got away safely");
+                                adder-=2;
+                                continueBat = false;
+
+                                // Quit option
+                                System.out.println();
+                                System.out.println("QUIT? (y/n)");
+                                System.out.print(">> ");
+                                String q = sc.next().toLowerCase();
+                                System.out.println();
+                                if (q.equals("y")) {
+                                    quit = true;
+                                }
+                                else if (q.equals("n")) {
+                                    quit = false;
+                                }
+                                else {
+                                    while (!q.equals("y") && !q.equals("n")) {
+                                        System.out.println("Invalid choice. Choose again: ");
+                                        q = sc.next().toLowerCase();
+                                    }
+                                }
+
+                                adder++;
+                                battleCtr++;
+                            }
+                            else {
+                                System.out.println("Couldn't escape!");
+                                continueBat = true;
+                            }
+                            runAttempts++;
+                        }
+                        else {                                              // invalid choice
+                            while (!cont.equals("y") && !cont.equals("n")) {
+                                System.out.println("Invalid choice. Choose again: ");
+                                cont = sc.next().toLowerCase();
+                            }
+                        }
+                    }
+                }
                 won = bat.win();
             }
             // *************battle ended***************
 
-            if (player.allFaint()) {                      // no more usable pokemon
-                System.out.println("Player is out of usable Pokemon.");
-                System.out.println("Sorry, you must start over your Pokemon journey.");
-                System.out.println("Don't worry, though: In this world, you are always 10, so you can play forever.");
-                quit = true;
-            }
-            else if (current.getFaintStatus()){       // current pokemon fainted, but players still has more pokemon
-                System.out.println("Your " + current.getName() + " fainted.");
-                System.out.println("Use next Pokemon? (y/n)");
-                System.out.print(">> ");
-                String cont = sc.next().toLowerCase();
-                System.out.println();
-                if (cont.equals("y")) {                                          // Allows player to switch pokemon
-                    System.out.print(player.getPokeList());
-                    System.out.print(">> ");
-                    int pok = sc.nextInt();
-
-                    while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
-                        System.out.println("Invalid choice. Choose again: ");
-                        pok = sc.nextInt();
-                    }
-                    bat.switchPokemon(pok-1);
-                    current = player.getList().get(pok-1);
-                }
-                else if (cont.equals("n")) {                               // attempts to run
-                    boolean r = bat.run(runAttempts);
-                    if (r) {
-                        System.out.println("Got away safely");
-                        adder-=2;
-
-                        // Quit option
-                        System.out.println();
-                        System.out.println("QUIT? (y/n)");
-                        System.out.print(">> ");
-                        String q = sc.next().toLowerCase();
-                        System.out.println();
-                        if (q.equals("y")) {
-                            quit = true;
-                        }
-                        else if (q.equals("n")) {
-                            quit = false;
-                        }
-                        else {
-                            while (!q.equals("y") && !q.equals("n")) {
-                                System.out.println("Invalid choice. Choose again: ");
-                                q = sc.next().toLowerCase();
-                            }
-                        }
-
-                        adder++;
-                        battleCtr++;
-                    }
-                    else {
-                        System.out.println("Couldn't escape!");
-                    }
-                    runAttempts++;
-                }
-                else {                                              // invalid choice
-                    while (!cont.equals("y") && !cont.equals("n")) {
-                        System.out.println("Invalid choice. Choose again: ");
-                        cont = sc.next().toLowerCase();
-                    }
-                }
-            }
-            else {
+            
+            if (opponent.getFaintStatus()) {
                 if (won) {                                         // if win, give EXP to winner
                     System.out.println("The wild " + opponent.getName() + " fainted.");
                     System.out.println(current.getName() + " gained " + opponent.giveEXP() + " EXP Points!");
