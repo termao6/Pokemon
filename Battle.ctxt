@@ -7,8 +7,8 @@ comment2.params=
 comment2.target=boolean\ catchPokemon()
 comment3.params=ind
 comment3.target=void\ switchPokemon(int)
-comment4.params=
-comment4.target=boolean\ run()
+comment4.params=attemptNum
+comment4.target=boolean\ run(int)
 comment5.params=
 comment5.target=boolean\ continueBattle()
 comment5.text=\r\n\ true\ \=\ battle\ continuing\r\n\ false\ \=\ battle\ is\ finished;\ time\ to\ start\ a\ new\ battle\r\n

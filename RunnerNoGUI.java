@@ -66,7 +66,7 @@ public class RunnerNoGUI
         boolean won = false;
         int battleCtr = 1;
         int adder = 0;
-        while (!quit) {
+        while (!quit) {                                                       // until player quits
 
             // Generate random opponent
             Pokemon opponent;
@@ -99,7 +99,7 @@ public class RunnerNoGUI
             System.out.println();
 
             // for one opponent (until battleEnd)
-
+            int runAttempts = 0;
             boolean continueBat = true;
             while (continueBat) {
                 System.out.println("Your Pokemon's " + current.HPtoString());
@@ -117,14 +117,15 @@ public class RunnerNoGUI
                 opt = sc.nextInt();
                 System.out.println();
                 if (opt == 4) {                                              // Run
-                    boolean r = bat.run();
+                    boolean r = bat.run(runAttempts);
                     if (r) {
                         System.out.println("Got away safely");
+                        adder-=2;
                     }
                     else {
                         System.out.println("Couldn't escape!");
                     }
-                    adder-=2;
+                    runAttempts++;
                 }
                 
                 else if (opt == 3) {                                         // Catch
@@ -152,7 +153,7 @@ public class RunnerNoGUI
                 
                 else if (opt == 1) {                                         // Attack
                     System.out.println("Choose an attack: ");
-                    System.out.println(current.movesToString());
+                    System.out.print(current.movesToString());
                     System.out.print(">> ");
                     int moveInd = sc.nextInt()-1;
                     System.out.println();
@@ -176,6 +177,8 @@ public class RunnerNoGUI
                 
                 // check status of battle
                 continueBat = bat.continueBattle();
+                if (current.getFaintStatus())
+                    continueBat = false;
                 won = bat.win();
 
                 // **********Opponent Attacks if battle continues**********
@@ -186,7 +189,7 @@ public class RunnerNoGUI
                     System.out.println();
                 }
             }
-            // *************battle ended
+            // *************battle ended***************
             
             if (player.allFaint()) {                      // no more usable pokemon
                 System.out.println("Player is out of usable Pokemon.");
@@ -212,14 +215,15 @@ public class RunnerNoGUI
                     bat.switchPokemon(pok-1);
                 }
                 else if (q.equals("n")) {                               // attempts to run
-                    boolean r = bat.run();
+                    boolean r = bat.run(runAttempts);
                     if (r) {
                         System.out.println("Got away safely");
+                        adder-=2;
                     }
                     else {
                         System.out.println("Couldn't escape!");
                     }
-                    adder-=2;
+                    runAttempts++;
                 }
                 else {                                              // invalid choice
                     while (!q.equals("y") && !q.equals("n")) {

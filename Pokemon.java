@@ -90,7 +90,7 @@ public abstract class Pokemon
     /***
      * returns speed to determine who goes first
      */
-    public int getspeed(){
+    public int getSpeed(){
         return speed;
     }
     

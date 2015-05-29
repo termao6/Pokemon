@@ -24,16 +24,20 @@ public class Battle
     {
         int baseDamage = move.getBaseAttack();
         double attDef = (double) attacker.getBaseAttack()/attacked.getBaseDefense();
+        double levDam = (2*attacker.getLevel()/5+2);
         int effect = move.levelOfEffectiveness(attacked);
-        int damageDone = (int) (baseDamage * attDef* (attacker.getLevel()/50.));
+        int damageDone = (int) ((baseDamage * attDef* (levDam))/50)+2;
         if (effect == 1) {
-            damageDone = (int) (damageDone * (2/3.));
+            damageDone = (int) (damageDone * (1/2.));
             System.out.println("It wasn't very effective...");
         }
         if (effect == 3) {
-            damageDone = (int) (damageDone * (4/3.));
+            damageDone = (int) (damageDone * (2.));
             System.out.println("Super effective!");
         }
+        if (move.getType().equals(attacker.getType()))
+            damageDone = (int) (damageDone*1.5);
+        damageDone = (int) (damageDone * (Math.random()/2+.5));
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
 
         if (attacked.getHPBattle() <= 0){
@@ -60,8 +64,9 @@ public class Battle
         current = t.getList().get(ind);
     }
 
-    public boolean run() {
-        battleEnd = (Math.random() < .6);
+    public boolean run(int attemptNum) {
+        double prob = (((current.getSpeed()*32)/(opponent.getSpeed()/4))+30*attemptNum)/256;
+        battleEnd = Math.random() < prob;
         return battleEnd;
     }
 
