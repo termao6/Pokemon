@@ -43,7 +43,7 @@ public class Pidgey extends Pokemon
     }
 
     public int giveEXP() {
-        return (int) (Math.pow(getLevel(), 1.7)*5);
+        return (int) (Math.pow(getLevel(), .9)*3);
     }
 
     public String getName() {

@@ -102,6 +102,7 @@ public abstract class Pokemon
      */
     public void heal() {
         HPBattle = HPFull;
+        revive();
     }
     
     /**
@@ -115,7 +116,7 @@ public abstract class Pokemon
      * when opponent loses, it doles out EXP to the winner to gain levels
      */
     public int giveEXP() {
-        return (int) (Math.pow(level, 1.7)*7);
+        return (int) (Math.pow(level, .9)*5);
     }
     
     
