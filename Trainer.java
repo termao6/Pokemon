@@ -41,9 +41,13 @@ public class Trainer
      * returns name and level of all of Trainer's pokemon
      */
     public String getPokeList() { 
+        int ind = 1;
         String poke = "";
         for(Pokemon pok : list) {
-            poke += pok.getName() + "\n";
+            poke += ind + " " + pok.getName();
+            if (pok.getFaintStatus())
+                poke += "/t - fainted";
+            poke += "\n";
         }
         return poke;
     }

@@ -98,14 +98,14 @@ public class RunnerNoGUI
             System.out.println("A wild " + opponent.getName() + " appeared!");
             System.out.println();
 
-            // for one battle (until battleEnd)
+            // for one opponent (until battleEnd)
 
             boolean continueBat = true;
             while (continueBat) {
                 System.out.println("Your Pokemon's " + current.HPtoString());
                 System.out.println("Opponent's " + opponent.HPtoString());
                 System.out.println();
-                
+
                 // Choices - what player can do
                 int opt = 0;
                 System.out.println("What will " + current.getName() + " do?");
@@ -116,7 +116,7 @@ public class RunnerNoGUI
                 System.out.print(">> ");
                 opt = sc.nextInt();
                 System.out.println();
-                if (opt == 4) { // Run
+                if (opt == 4) {                                              // Run
                     boolean r = bat.run();
                     if (r) {
                         System.out.println("Got away safely");
@@ -126,7 +126,8 @@ public class RunnerNoGUI
                     }
                     adder-=2;
                 }
-                else if (opt == 3) { // Catch
+                
+                else if (opt == 3) {                                         // Catch
                     boolean c = bat.catchPokemon();
                     if (c) {
                         System.out.println("Congratulations! You have caught a " + opponent.getName() + "!");
@@ -135,22 +136,21 @@ public class RunnerNoGUI
                         System.out.println("Catch unsuccessful! :(");
                     }
                 }
-                else if (opt == 2) { // Switch
+                
+                else if (opt == 2) {                                        // Switch
                     System.out.println("Choose a Pokemon");
                     System.out.print(player.getPokeList());
-                    System.out.println("To choose the first pokemon, press 1; ");
-                    System.out.println("To choose the second pokemon, press 2; ");
-                    System.out.println("and etc.");
                     System.out.print(">> ");
                     int pok = sc.nextInt();
-
-                    while (pok > player.getList().size() || pok < 1) {
+                    
+                    while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
                         System.out.println("Invalid choice. Choose again: ");
                         pok = sc.nextInt();
                     }
                     bat.switchPokemon(pok-1);
                 }
-                else if (opt == 1) { // Attack
+                
+                else if (opt == 1) {                                         // Attack
                     System.out.println("Choose an attack: ");
                     System.out.println(current.movesToString());
                     System.out.print(">> ");
@@ -166,16 +166,19 @@ public class RunnerNoGUI
                     bat.attack(current, opponent, selected);
                     System.out.println(current.getName() + " (you) used " + selected.getName());
                 }
-                else { // Not an option
+                
+                else {                                                    // Not an option
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
                         System.out.println("Invalid choice. Choose again: ");
                         opt = sc.nextInt();
                     }
                 }
+                
+                // check status of battle
                 continueBat = bat.continueBattle();
                 won = bat.win();
 
-                // Opponent Attacks if battle continues
+                // **********Opponent Attacks if battle continues**********
                 if (continueBat) {
                     int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
                     bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
@@ -183,43 +186,76 @@ public class RunnerNoGUI
                     System.out.println();
                 }
             }
-            if (won) { // if win, give EXP to winner
-                System.out.println("The wild " + opponent.getName() + " fainted.");
-                System.out.println(current.getName() + " gained " + opponent.giveEXP() + " EXP Points!");
-            }
-            else { // if lose
-                if (player.allFaint()) {
-                    System.out.println("Player is out of usable Pokemon.");
-                    System.out.println("Sorry, you must start over your Pokemon journey.");
-                    System.out.println("Don't worry, though: In this world, you are always 10, so you can play forever.");
-                    quit = true;
-                }
-                else {
-                    
-                }
-            }
-
-            // Quit option
-            System.out.println();
-            System.out.println("QUIT? (y/n)");
-            System.out.print(">> ");
-            String q = sc.next().toLowerCase();
-            if (q.equals("y")) {
+            // *************battle ended
+            
+            if (player.allFaint()) {                      // no more usable pokemon
+                System.out.println("Player is out of usable Pokemon.");
+                System.out.println("Sorry, you must start over your Pokemon journey.");
+                System.out.println("Don't worry, though: In this world, you are always 10, so you can play forever.");
                 quit = true;
             }
-            else if (q.equals("n")) {
-                quit = false;
-            }
-            else {
-                while (!q.equals("y") && !q.equals("n")) {
-                    System.out.println("Invalid choice. Choose again: ");
-                    q = sc.next().toLowerCase();
+            else if (current.getFaintStatus()){       // current pokemon fainted, but players still has more pokemon
+                System.out.println("Your " + current.getName() + " fainted.");
+                System.out.println("Use next Pokemon? (y/n)");
+                System.out.print(">> ");
+                String q = sc.next().toLowerCase();
+                System.out.println();
+                if (q.equals("y")) {                                          // Allows player to switch pokemon
+                    System.out.print(player.getPokeList());
+                    System.out.print(">> ");
+                    int pok = sc.nextInt();
+                    
+                    while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
+                        System.out.println("Invalid choice. Choose again: ");
+                        pok = sc.nextInt();
+                    }
+                    bat.switchPokemon(pok-1);
+                }
+                else if (q.equals("n")) {                               // attempts to run
+                    boolean r = bat.run();
+                    if (r) {
+                        System.out.println("Got away safely");
+                    }
+                    else {
+                        System.out.println("Couldn't escape!");
+                    }
+                    adder-=2;
+                }
+                else {                                              // invalid choice
+                    while (!q.equals("y") && !q.equals("n")) {
+                        System.out.println("Invalid choice. Choose again: ");
+                        q = sc.next().toLowerCase();
+                    }
                 }
             }
-            
-            
-            adder++;
-            battleCtr++;
+            else {
+                if (won) {                                         // if win, give EXP to winner
+                    System.out.println("The wild " + opponent.getName() + " fainted.");
+                    System.out.println(current.getName() + " gained " + opponent.giveEXP() + " EXP Points!");
+                }
+
+                // Quit option
+                System.out.println();
+                System.out.println("QUIT? (y/n)");
+                System.out.print(">> ");
+                String q = sc.next().toLowerCase();
+                System.out.println();
+                if (q.equals("y")) {
+                    quit = true;
+                }
+                else if (q.equals("n")) {
+                    quit = false;
+                }
+                else {
+                    while (!q.equals("y") && !q.equals("n")) {
+                        System.out.println("Invalid choice. Choose again: ");
+                        q = sc.next().toLowerCase();
+                    }
+                }
+
+                adder++;
+                battleCtr++;
+            }
         }
 
     }

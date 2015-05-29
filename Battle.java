@@ -12,7 +12,7 @@ public class Battle
     Pokemon current;
     boolean battleEnd = false;
     boolean win = false;
-    
+
     public Battle(Trainer t2, Pokemon cur, Pokemon opp)
     {
         t = t2;
@@ -35,7 +35,7 @@ public class Battle
             System.out.println("Super effective!");
         }
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
-        
+
         if (attacked.getHPBattle() <= 0){
             attacked.faint();
             if (attacked == opponent)
@@ -43,7 +43,7 @@ public class Battle
             battleEnd = true;
         }
     }
-    
+
     public boolean catchPokemon() 
     {
         int catchRate = opponent.getHPFull()/opponent.getHPBattle();
@@ -54,17 +54,17 @@ public class Battle
         }
         return false;
     }
-    
+
     public void switchPokemon(int ind)
     {
         current = t.getList().get(ind);
     }
-    
+
     public boolean run() {
         battleEnd = (Math.random() < .6);
         return battleEnd;
     }
-    
+
     /**
      * true = battle continuing
      * false = battle is finished; time to start a new battle
@@ -75,19 +75,19 @@ public class Battle
         }
         return !battleEnd;
     }
-    
+
     public boolean win() {
         return win;
     }
-    
+
     public void setOpponent(Pokemon p){
         opponent = p;
     }
-    
+
     public Pokemon getCurrent() {
         return current;
     }
-    
+
     public Pokemon getOpponent() {
         return opponent;
     }
