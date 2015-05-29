@@ -38,6 +38,8 @@ public class Battle
         if (move.getType().equals(attacker.getType()))
             damageDone = (int) (damageDone*1.5);
         damageDone = (int) (damageDone * (Math.random()/2+.5));
+        if (baseDamage==0)
+            damageDone=0;
         attacked.setHPBattle(attacked.getHPBattle()-damageDone);
 
         if (attacked.getHPBattle() <= 0){
