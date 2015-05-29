@@ -119,9 +119,11 @@ public class RunnerNoGUI
                     if (r) {
                         System.out.println("Got away safely");
                         adder-=2;
+                        continueBat = false;
                     }
                     else {
                         System.out.println("Couldn't escape!");
+                        continueBat = true;
                     }
                     runAttempts++;
                 }
@@ -130,9 +132,11 @@ public class RunnerNoGUI
                     boolean c = bat.catchPokemon();
                     if (c) {
                         System.out.println("Congratulations! You have caught a " + opponent.getName() + "!");
+                        continueBat = false;
                     }
                     else {
                         System.out.println("Catch unsuccessful! :(");
+                        continueBat = true;
                     }
                 }
 
@@ -148,6 +152,7 @@ public class RunnerNoGUI
                     }
                     bat.switchPokemon(pok-1);
                     current = player.getList().get(pok-1);
+                    continueBat = true;
                 }
 
                 else if (opt == 1) {                                         // Attack
@@ -165,6 +170,7 @@ public class RunnerNoGUI
                     Move selected = current.getListOfAttacks().get(moveInd);
                     System.out.println(current.getName() + " (you) used " + selected.getName());
                     bat.attack(current, opponent, selected);
+                    continueBat = true;
                 }
 
                 else {                                                    // Not an option
@@ -175,8 +181,18 @@ public class RunnerNoGUI
                 }
 
                 // check status of battle
-                continueBat = bat.continueBattle();
 
+                if (continueBat && !current.getFaintStatus() && !opponent.getFaintStatus()) {
+                    int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
+                    System.out.println(opponent.getName() + " used " + opponent.getListOfAttacks().get(oppMoveInd).getName());
+                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
+                    System.out.println();
+                }
+                
+                if (opponent.getFaintStatus()) {
+                    continueBat = false;
+                }
+                
                 //check if current pokemon has fainted
                 if (current.getFaintStatus()) {
                     if (player.allFaint()) { // no more usable pokemon
@@ -205,6 +221,7 @@ public class RunnerNoGUI
                             bat.switchPokemon(pok-1);
                             current = player.getList().get(pok-1);
                             continueBat = true;
+                            
                         }
                         else if (cont.equals("n")) {                               // attempts to run
                             boolean r = bat.run(runAttempts);
@@ -252,6 +269,7 @@ public class RunnerNoGUI
                                 current = player.getList().get(pok-1);
 
                                 continueBat = true;
+                                
                             }
                             runAttempts++;
                         }
@@ -265,12 +283,7 @@ public class RunnerNoGUI
                 }
 
                 // **********Opponent Attacks if battle continues**********
-                if (continueBat) {
-                    int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
-                    System.out.println(opponent.getName() + " used " + opponent.getListOfAttacks().get(oppMoveInd).getName());
-                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
-                    System.out.println();
-                }
+                
 
                 won = bat.win();
             }
