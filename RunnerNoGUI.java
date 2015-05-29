@@ -156,7 +156,7 @@ public class RunnerNoGUI
                     System.out.print(">> ");
                     int moveInd = sc.nextInt()-1;
                     System.out.println();
-                    if (moveInd > current.getListOfAttacks().size() || moveInd < 0) {
+                    if (moveInd >= current.getListOfAttacks().size() || moveInd < 0) {
                         while (moveInd > current.getListOfAttacks().size() || moveInd <= 0) {
                             System.out.println("Invalid choice. Choose again: ");
                             moveInd = sc.nextInt()-1;
@@ -176,9 +176,7 @@ public class RunnerNoGUI
 
                 // check status of battle
                 continueBat = bat.continueBattle();
-                if (current.getFaintStatus())
-                    continueBat = false;
-                won = bat.win();
+                
 
                 // **********Opponent Attacks if battle continues**********
                 if (continueBat) {
@@ -187,6 +185,11 @@ public class RunnerNoGUI
                     bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
                     System.out.println();
                 }
+                
+                //check if current pokemon has fainted
+                if (current.getFaintStatus())
+                    continueBat = false;
+                won = bat.win();
             }
             // *************battle ended***************
 
