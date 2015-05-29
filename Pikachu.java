@@ -18,16 +18,12 @@ public class Pikachu extends Pokemon
        
         attacks.add(new Move("Thunder Shock", "Electric", 40));
         attacks.add(new Move("Growl", "Normal", 0));
-        HPFull = (int) (Math.random()*(level/4)) + (int) ((35.0/9) * (double) lev);
-        attack = (int) (Math.random()*(level/4)) + (int) ((55.0/17) * (double) lev);
-        defense = (int) (Math.random()*(level/6)) + (int) ((30.0/17) * (double) lev);
-        speed = (int) (Math.random()*(level/2.5)) + (int) ((90.0/17) * (double) lev);
         
         setType("Electric");
-        setHP(HPFull);
-        setAttack(attack);
-        setDefense(defense);
-        setSpeed(speed);
+        setHP(35);
+        setAttack(55);
+        setDefense(30);
+        setSpeed(90);
     }
     public void gainEXP (int points){
         EXP += points;
