@@ -63,12 +63,10 @@ public class RunnerNoGUI
 
         // ******************Commence battles*********************
         boolean quit = false;
-        boolean won = false;
+        boolean won = true;
         int battleCtr = 1;
         int adder = 0;
-        while (!quit) {                                                       // until player quits
-
-            // Generate random opponent
+        while (!quit) {    // until player quits                  
             Pokemon opponent;
             double rand = Math.random()*5.5;
             int lev = (int) (Math.random()*3) - 1 + starter.getLevel() + adder;
@@ -127,7 +125,7 @@ public class RunnerNoGUI
                     }
                     runAttempts++;
                 }
-                
+
                 else if (opt == 3) {                                         // Catch
                     boolean c = bat.catchPokemon();
                     if (c) {
@@ -137,20 +135,21 @@ public class RunnerNoGUI
                         System.out.println("Catch unsuccessful! :(");
                     }
                 }
-                
+
                 else if (opt == 2) {                                        // Switch
                     System.out.println("Choose a Pokemon");
                     System.out.print(player.getPokeList());
                     System.out.print(">> ");
                     int pok = sc.nextInt();
-                    
+
                     while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
                         System.out.println("Invalid choice. Choose again: ");
                         pok = sc.nextInt();
                     }
                     bat.switchPokemon(pok-1);
+                    current = player.getList().get(pok-1);
                 }
-                
+
                 else if (opt == 1) {                                         // Attack
                     System.out.println("Choose an attack: ");
                     System.out.print(current.movesToString());
@@ -164,17 +163,17 @@ public class RunnerNoGUI
                         }
                     }
                     Move selected = current.getListOfAttacks().get(moveInd);
-                    bat.attack(current, opponent, selected);
                     System.out.println(current.getName() + " (you) used " + selected.getName());
+                    bat.attack(current, opponent, selected);
                 }
-                
+
                 else {                                                    // Not an option
                     while (opt != 1 && opt != 2 && opt != 3 && opt != 4) {
                         System.out.println("Invalid choice. Choose again: ");
                         opt = sc.nextInt();
                     }
                 }
-                
+
                 // check status of battle
                 continueBat = bat.continueBattle();
                 if (current.getFaintStatus())
@@ -184,13 +183,13 @@ public class RunnerNoGUI
                 // **********Opponent Attacks if battle continues**********
                 if (continueBat) {
                     int oppMoveInd = (int) (Math.random()*opponent.getListOfAttacks().size());
-                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
                     System.out.println(opponent.getName() + " used " + opponent.getListOfAttacks().get(oppMoveInd).getName());
+                    bat.attack(opponent, current, opponent.getListOfAttacks().get(oppMoveInd));
                     System.out.println();
                 }
             }
             // *************battle ended***************
-            
+
             if (player.allFaint()) {                      // no more usable pokemon
                 System.out.println("Player is out of usable Pokemon.");
                 System.out.println("Sorry, you must start over your Pokemon journey.");
@@ -201,24 +200,47 @@ public class RunnerNoGUI
                 System.out.println("Your " + current.getName() + " fainted.");
                 System.out.println("Use next Pokemon? (y/n)");
                 System.out.print(">> ");
-                String q = sc.next().toLowerCase();
+                String cont = sc.next().toLowerCase();
                 System.out.println();
-                if (q.equals("y")) {                                          // Allows player to switch pokemon
+                if (cont.equals("y")) {                                          // Allows player to switch pokemon
                     System.out.print(player.getPokeList());
                     System.out.print(">> ");
                     int pok = sc.nextInt();
-                    
+
                     while (pok > player.getList().size() || pok < 1 || player.getList().get(pok-1).getFaintStatus()) {
                         System.out.println("Invalid choice. Choose again: ");
                         pok = sc.nextInt();
                     }
                     bat.switchPokemon(pok-1);
+                    current = player.getList().get(pok-1);
                 }
-                else if (q.equals("n")) {                               // attempts to run
+                else if (cont.equals("n")) {                               // attempts to run
                     boolean r = bat.run(runAttempts);
                     if (r) {
                         System.out.println("Got away safely");
                         adder-=2;
+
+                        // Quit option
+                        System.out.println();
+                        System.out.println("QUIT? (y/n)");
+                        System.out.print(">> ");
+                        String q = sc.next().toLowerCase();
+                        System.out.println();
+                        if (q.equals("y")) {
+                            quit = true;
+                        }
+                        else if (q.equals("n")) {
+                            quit = false;
+                        }
+                        else {
+                            while (!q.equals("y") && !q.equals("n")) {
+                                System.out.println("Invalid choice. Choose again: ");
+                                q = sc.next().toLowerCase();
+                            }
+                        }
+
+                        adder++;
+                        battleCtr++;
                     }
                     else {
                         System.out.println("Couldn't escape!");
@@ -226,9 +248,9 @@ public class RunnerNoGUI
                     runAttempts++;
                 }
                 else {                                              // invalid choice
-                    while (!q.equals("y") && !q.equals("n")) {
+                    while (!cont.equals("y") && !cont.equals("n")) {
                         System.out.println("Invalid choice. Choose again: ");
-                        q = sc.next().toLowerCase();
+                        cont = sc.next().toLowerCase();
                     }
                 }
             }
@@ -260,6 +282,7 @@ public class RunnerNoGUI
                 adder++;
                 battleCtr++;
             }
+            player.healAll();
         }
 
     }

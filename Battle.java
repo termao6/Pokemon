@@ -65,7 +65,7 @@ public class Battle
     }
 
     public boolean run(int attemptNum) {
-        double prob = (((current.getSpeed()*32)/(opponent.getSpeed()/4))+30*attemptNum)/256;
+        double prob = (((current.getSpeed()*32)/(opponent.getSpeed()/4))+30*attemptNum)/156;
         battleEnd = Math.random() < prob;
         return battleEnd;
     }

@@ -48,6 +48,7 @@ public class Trainer
             if (pok.getFaintStatus())
                 poke += "/t - fainted";
             poke += "\n";
+            ind++;
         }
         return poke;
     }
