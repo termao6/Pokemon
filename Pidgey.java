@@ -13,30 +13,25 @@ public class Pidgey extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Pidgey (int lev){
-        super(lev);
-        attacks.add(new Move("Gust", "Normal", 40));
+        super(lev, 45, 45, 56, 40);
+        attacks.add(new Move("Tackle", "Normal", 35));
         attacks.add(new Move("Sand Attack", "Normal", 0));
-        
+        if (level>=9)
+            attacks.add(new Move("Gust", "Normal", 40));
         setType("Normal");
-        setHP(40);
-        setAttack(45);
-        setDefense(45);
-        setSpeed(56);
     }
-    public void gainEXP(int points) {
-        EXP += points;
-        if ((EXP-level)/2.5 > level) {
-            level++;
-            HPFull += (int) (Math.random()*(level/3.5));
-            attack += (int) (Math.random()*(level/4.5));
-            defense += (int) (Math.random()*(level/5));
-            speed += (int) (Math.random()*(level/4));
-            HPBattle = HPFull;
-        }
+
+    public void gainLevel() {
+        super.gainLevel();
+        if (level==9)
+            attacks.add(new Move("Gust", "Normal", 40));
+
     }
+
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+
     public String movesToString() {
         String m = "";
         int ctr = 1;
@@ -46,9 +41,11 @@ public class Pidgey extends Pokemon
         }
         return m;
     }
+
     public int giveEXP() {
-        return (int) (Math.pow(level, 1.7)*5);
+        return (int) (Math.pow(getLevel(), 1.7)*5);
     }
+
     public String getName() {
         return ("PIDGEY" + " (Lv " + getLevel() + ")");
     }

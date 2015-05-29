@@ -13,30 +13,25 @@ public class Bulbasaur extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Bulbasaur (int lev){
-        super(lev);
+        super(lev, 45, 49, 49, 45);
         attacks.add(new Move("Tackle", "Normal", 35));
         attacks.add(new Move("Growl", "Normal", 0));
-        
+        if (level>=9)
+            attacks.add(new Move ("Vine Whip", "Grass", 35));
+
         setType("Grass");
-        setHP(45);
-        setAttack(49);
-        setDefense(49);
-        setSpeed(45);
     }
-    public void gainEXP(int points) {
-        EXP += points;
-        if ((EXP-level)/3 > level) {
-            level++;
-            HPFull += (int) (Math.random()*(level/3));
-            attack += (int) (Math.random()*(level/4));
-            defense += (int) (Math.random()*(level/4));
-            speed += (int) (Math.random()*(level/4.5));
-            HPBattle = HPFull;
-        }
+
+    public void gainLevel() {
+        super.gainLevel();
+        if (getLevel()==9)
+            attacks.add(new Move ("Vine Whip", "Grass", 35));
     }
+
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+
     public String movesToString() {
         String m = "";
         int ctr = 1;
@@ -46,6 +41,7 @@ public class Bulbasaur extends Pokemon
         }
         return m;
     }
+
     public String getName() {
         return ("BULBASAUR" + " (Lv " + getLevel() + ")");
     }

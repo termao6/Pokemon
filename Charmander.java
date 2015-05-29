@@ -13,30 +13,25 @@ public class Charmander extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Charmander (int lev){
-        super(lev);
+        super(lev, 52, 48, 65, 39);
         attacks.add(new Move("Scratch", "Normal", 40));
         attacks.add(new Move("Growl", "Normal", 0));
-        
+        if (level>=9)
+            attacks.add(new Move("Ember", "Fire", 40));
         setType("Fire");
-        setHP(39);
-        setAttack(52);
-        setDefense(48);
-        setSpeed(65);
     }
+
     public void gainEXP(int points) {
-        EXP += points;
-        if (EXP/3 > level) {
-            level++;
-            attack += (int) (Math.random()*(level/3.5));
-            defense += (int) (Math.random()*(level/4));
-            HPFull += (int) (Math.random()*(level/4.5));
-            speed += (int) (Math.random()*(level/3.5));
-            HPBattle = HPFull;
-        }
+        super.gainLevel();
+        if (level==9)
+            attacks.add(new Move("Ember", "Fire", 40));
+
     }
+
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+
     public String movesToString() {
         String m = "";
         int ctr = 1;
@@ -46,6 +41,7 @@ public class Charmander extends Pokemon
         }
         return m;
     }
+
     public String getName() {
         return ("CHARMANDER" + " (Lv " + getLevel() + ")");
     }

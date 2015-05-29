@@ -13,30 +13,26 @@ public class Squirtle extends Pokemon
     private int HPFull, HPBattle, attack, defense, speed;
     private List<Move> attacks = new ArrayList<Move>();
     public Squirtle (int lev){
-        super(lev);
+        super(lev, 48, 65, 43, 44);
         attacks.add(new Move("Tackle", "Normal", 35));
         attacks.add(new Move("Tail Whip", "Normal", 0));
-        
+        if (level>=9)
+            attacks.add(new Move("Bubble", "Water", 20));
+
         setType("Water");
-        setHP(44);
-        setAttack(48);
-        setDefense(65);
-        setSpeed(43);
     }
-    public void gainEXP(int points) {
-        EXP += points;
-        if ((EXP-level)/3 > level) {
-            level++;
-            HPFull += (int) (Math.random()*(level/3));
-            attack += (int) (Math.random()*(level/4));
-            defense += (int) (Math.random()*(level/3.5));
-            speed += (int) (Math.random()*(level/4.5));
-            HPBattle = HPFull;
-        }
+
+    public void gainLevel() {
+        super.gainLevel();
+        if (level==9)
+            attacks.add(new Move("Bubble", "Water", 20));
+
     }
+
     public List<Move> getListOfAttacks() {
         return attacks;
     }
+
     public String movesToString() {
         String m = "";
         int ctr = 1;
@@ -46,6 +42,7 @@ public class Squirtle extends Pokemon
         }
         return m;
     }
+
     public String getName() {
         return ("SQUIRTLE" + " (Lv " + getLevel() + ")");
     }
